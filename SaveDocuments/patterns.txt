@@ -1,0 +1,5 @@
+﻿Репозиторий - все классы реализующие интерфейс IDocumentRepositoy
+Компоновщик - CompositeDocument
+Посетитель - все классы реализующие интерфейс IRenderer
+Стратегия - все классы реазизующие интерфейс IExporter
+Декоратор - EncryptExporter, ZipExporter
