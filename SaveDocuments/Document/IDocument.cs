@@ -7,32 +7,35 @@ using System.Threading.Tasks;
 
 namespace SaveDocuments.Document
 {
+  /// <summary>
+  /// Интерфейс описывающий документ.
+  /// </summary>
   internal interface IDocument
   {
     /// <summary>
-    /// Идентификатор документа
+    /// Идентификатор документа.
     /// </summary>
     int Id { get; }
 
     /// <summary>
-    /// Имя документа
+    /// Имя документа.
     /// </summary>
     string Name { get; }
     
     /// <summary>
-    /// Контент документа
+    /// Контент документа.
     /// </summary>
     string Content { get; }
 
     /// <summary>
-    /// Описание документа
+    /// Описание документа.
     /// </summary>
     string Description { get; }
 
     /// <summary>
-    /// Метод применения посетителя
+    /// Метод применения посетителя.
     /// </summary>
-    /// <param name="renderer">Посетитель</param>
+    /// <param name="renderer">Посетитель.</param>
     void Accept(IRenderer renderer);
   }
 }

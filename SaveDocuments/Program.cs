@@ -7,20 +7,46 @@ using System.Threading.Tasks;
 
 namespace SaveDocuments
 {
-  class Program
+  /// <summary>
+  /// Основной класс приложения.
+  /// </summary>
+  public class Program
   {
     #region Константы
+
+    /// <summary>
+    /// Аргумент командной строки. 
+    /// Указывающий идентификатор документа.
+    /// </summary>
     private const string DocOption = "--doc";
 
+    /// <summary>
+    /// Аргумент командной строки. 
+    /// Указывающий директорию экспорта документа.
+    /// </summary>
     private const string DirOption = "--dir";
     
+    /// <summary>
+    /// Аргумент командной строки. 
+    /// Включает шифрование файлов документов.
+    /// </summary>
     private const string EncryptOption = "--encrypt";
     
+    /// <summary>
+    /// Аргумент командной строки. 
+    /// Включает архивирование файлов документов.
+    /// </summary>
     private const string ZipOption = "--zip";
+
     #endregion
 
     #region Методы
-    static void Main(string[] args)
+    
+    /// <summary>
+    /// Стандартная точка входа в приложение.
+    /// </summary>
+    /// <param name="args">Аргументы командной строки.</param>
+    public static void Main(string[] args)
     {
       var executor = new DocumentOperator();
       try
@@ -41,7 +67,12 @@ namespace SaveDocuments
       Console.ReadLine();
     }
 
-    static CommandLineOptions ParseCommandLine(string [] args)
+    /// <summary>
+    /// Парсит аргументы командной строки.
+    /// </summary>
+    /// <param name="args">Аргументы командной строки.</param>
+    /// <returns>Опции для экспорта документа.</returns>
+    private static CommandLineOptions ParseCommandLine(string [] args)
     {
       var result = new CommandLineOptions();
       foreach (var arg in args)
@@ -72,7 +103,11 @@ namespace SaveDocuments
       return result;
     }
 
-    static void PrintHelp()
+
+    /// <summary>
+    /// Печатает справку.
+    /// </summary>
+    private static void PrintHelp()
     {
       Console.WriteLine("Help:");
       Console.WriteLine($"{DocOption}=something   Document id.");
@@ -80,14 +115,37 @@ namespace SaveDocuments
       Console.WriteLine($"{EncryptOption}         Encrypt directory files.");
       Console.WriteLine($"{ZipOption}             Zip directory files.");
     }
+
     #endregion
   }
 
-  class CommandLineOptions
+  /// <summary>
+  /// Опции экспорта документа.
+  /// </summary>
+  internal class CommandLineOptions
   {
+    #region Поля и свойства
+
+    /// <summary>
+    /// Идентификатор документа.
+    /// </summary>
     public int DocumentId { get; set; }
+    
+    /// <summary>
+    /// Директория экспорта.
+    /// </summary>
     public string DirectoryPath { get; set; }
+    
+    /// <summary>
+    /// Опция шифрования документа.
+    /// </summary>
     public bool Encrypt { get; set; }
+    
+    /// <summary>
+    /// Опция архивирования документа.
+    /// </summary>
     public bool Zip { get; set; }
+
+    #endregion
   }
 }

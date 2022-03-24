@@ -8,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace SaveDocuments.Export
 {
+  /// <summary>
+  /// Экспортирует документ в директорию. 
+  /// </summary>
   internal class SimpleExporter : IDocumentExporter
   {
+    #region IDocumentExporter
+
     public string Path { get; private set; }
 
     public void Export(IDocument document)
@@ -27,9 +32,19 @@ namespace SaveDocuments.Export
       Console.WriteLine(document.Description);
     }
 
+    #endregion
+
+    #region Конструкторы
+
+    /// <summary>
+    /// Конструктор.
+    /// </summary>
+    /// <param name="path"></param>
     public SimpleExporter(string path)
     {
       this.Path = path ?? throw new ArgumentNullException(nameof(path));
     }
+
+    #endregion
   }
 }

@@ -49,7 +49,7 @@
     <Compile Include="Document\SimpleDocument.cs" />
     <Compile Include="Document\IDocument.cs" />
     <Compile Include="Encrypt\EncryptProvider.cs" />
-    <Compile Include="Export\EncriptExporter.cs" />
+    <Compile Include="Export\EncryptExporter.cs" />
     <Compile Include="Export\IDocumentExporter.cs" />
     <Compile Include="Export\SimpleExporter.cs" />
     <Compile Include="Export\ZipExporter.cs" />

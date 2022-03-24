@@ -7,17 +7,20 @@ using System.Threading.Tasks;
 
 namespace SaveDocuments.Export
 {
+  /// <summary>
+  /// Экспортирует документ в хранилище.
+  /// </summary>
   internal interface IDocumentExporter
   {
     /// <summary>
-    /// Директория
+    /// Директория.
     /// </summary>
     string Path { get; }
 
     /// <summary>
-    /// Экспорт документа 
+    /// Экспорт документа. 
     /// </summary>
-    /// <param name="document">Документ</param>
+    /// <param name="document">Документ.</param>
     void Export(IDocument document);
   }
 }

@@ -7,19 +7,22 @@ using System.Threading.Tasks;
 
 namespace SaveDocuments.Repository
 {
+  /// <summary>
+  /// Интерфейс репозиторий документов.
+  /// </summary>
   internal interface IDocumentRepository
   {
     /// <summary>
-    /// Получить документ из репозитория
+    /// Получить документ из репозитория.
     /// </summary>
-    /// <param name="id">Идентификатор репозитория</param>
-    /// <returns>Документ</returns>
+    /// <param name="id">Идентификатор репозитория.</param>
+    /// <returns>Документ.</returns>
     IDocument Get(int id);
 
     /// <summary>
-    /// Сохранить документ из репозитория
+    /// Сохранить документ в репозиторий.
     /// </summary>
-    /// <param name="document">Документ</param>
+    /// <param name="document">Документ.</param>
     void Save(IDocument document);
   }
 }

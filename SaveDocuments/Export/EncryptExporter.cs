@@ -1,5 +1,5 @@
-﻿using SaveDocuments.Archiver;
-using SaveDocuments.Document;
+﻿using SaveDocuments.Document;
+using SaveDocuments.Encrypt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,9 @@ namespace SaveDocuments.Export
 {
   /// <summary>
   /// Экспортирует документы в директорию.
-  /// Архивирует файлы в директории.
+  /// И шифрует файлы в директории.
   /// </summary>
-  internal class ZipExporter : IDocumentExporter
+  internal class EncryptExporter : IDocumentExporter
   {
     #region Поля и свойства
 
@@ -22,9 +22,9 @@ namespace SaveDocuments.Export
     private readonly IDocumentExporter exporter;
 
     /// <summary>
-    /// Провайдер для архивирования
+    /// Провайдер для шифрования.
     /// </summary>
-    private readonly ZipProvider provider;
+    private readonly EncryptProvider provider;
 
     #endregion
 
@@ -36,7 +36,7 @@ namespace SaveDocuments.Export
     {
       this.exporter.Export(document);
       Console.WriteLine();
-      this.provider.Zip(this.Path, document.Name);
+      this.provider.Encript(this.Path);
     }
 
     #endregion
@@ -47,10 +47,10 @@ namespace SaveDocuments.Export
     /// Конструктор.
     /// </summary>
     /// <param name="exporter">Экспортер документов.</param>
-    public ZipExporter(IDocumentExporter exporter)
+    public EncryptExporter(IDocumentExporter exporter)
     {
       this.exporter = exporter ?? throw new ArgumentNullException(nameof(exporter));
-      this.provider = new ZipProvider();
+      this.provider = new EncryptProvider();
     }
 
     #endregion

@@ -7,9 +7,22 @@ using System.Threading.Tasks;
 
 namespace SaveDocuments.Repository
 {
-  internal class SimpleDocumentRepository : IDocumentRepository
+  /// <summary>
+  /// Простой репозиторий.
+  /// Заглушка возвращающая всегда один документ.
+  /// </summary>
+  internal sealed class SimpleDocumentRepository : IDocumentRepository
   {
+    #region Поля и свойства
+
+    /// <summary>
+    /// Документ
+    /// </summary>
     private readonly IDocument document;
+
+    #endregion
+
+    #region IDocumentRepository
 
     public IDocument Get(int id)
     {
@@ -21,6 +34,13 @@ namespace SaveDocuments.Repository
       Console.WriteLine("Сохранение документа {0} в репозиторий", document.Name);
     }
 
+    #endregion
+
+    #region Конструкторы
+
+    /// <summary>
+    /// Конструктор
+    /// </summary>
     public SimpleDocumentRepository()
     {
       var document = new CompositeDocument(1, "Комплект 1");
@@ -33,5 +53,7 @@ namespace SaveDocuments.Repository
 
       this.document = document;
     }
+
+    #endregion
   }
 }

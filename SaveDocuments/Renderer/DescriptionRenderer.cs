@@ -9,20 +9,26 @@ namespace SaveDocuments.Renderer
 {
 
   /// <summary>
-  /// Формирует описание докмента
+  /// Формирует описание докмента.
   /// </summary>
   internal class DescriptionRenderer : IRenderer
   {
     #region Поля и свойства
+
+    /// <summary>
+    /// Описание документа.
+    /// </summary>
     private readonly StringBuilder builder = new StringBuilder();
 
     /// <summary>
-    /// Уровень вложенности
+    /// Уровень вложенности.
     /// </summary>
     private int deepLevel = 0;
+    
     #endregion
 
     #region IRenderer
+
     public void BeginVisit(IDocument document)
     {
       builder.AppendLine(new string(' ', 2 * deepLevel) + document.Name);
@@ -41,13 +47,20 @@ namespace SaveDocuments.Renderer
     {
       deepLevel--;
     }
+
     #endregion
 
     #region Базовый класс
+
+    /// <summary>
+    /// Возвращает строку, представляющую текущий объект.
+    /// </summary>
+    /// <returns>Описание документа.</returns>
     public override string ToString()
     {
       return builder.ToString();
     }
+
     #endregion
   }
 }
