@@ -1,10 +1,6 @@
 ﻿using SaveDocuments.Document;
 using SaveDocuments.Export;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaveDocuments.Repository
 {
@@ -14,7 +10,7 @@ namespace SaveDocuments.Repository
   internal class DirectoryDocumentRepositor : IDocumentRepository
   {
     #region Поля и свойства
-    
+
     /// <summary>
     /// Алгоритм экспорта документа.
     /// </summary>
@@ -23,7 +19,7 @@ namespace SaveDocuments.Repository
     #endregion
 
     #region IDocumentRepository
-    
+
     public IDocument Get(int id)
     {
       Console.WriteLine("Get document by id {0}", id);

@@ -1,10 +1,5 @@
-﻿using SaveDocuments.Renderer;
-using System;
-using System.Collections;
+﻿using SaveDocuments.Visitor;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaveDocuments.Document
 {
@@ -19,7 +14,7 @@ namespace SaveDocuments.Document
     /// Коллекция документов.
     /// </summary>
     private readonly Dictionary<int, IDocument> documents = new Dictionary<int, IDocument>();
-    
+
     #endregion
 
     #region IDocument
@@ -32,10 +27,10 @@ namespace SaveDocuments.Document
 
     public string Description => GetDescription();
 
-    public void Accept(IRenderer renderer)
+    public void Accept(IVisitor renderer)
     {
       renderer.BeginVisitComposite(this);
-      foreach(var document in this.documents.Values)
+      foreach (var document in this.documents.Values)
       {
         document.Accept(renderer);
       }
@@ -47,7 +42,7 @@ namespace SaveDocuments.Document
     #region Методы
 
     /// <summary>
-    /// Добавляет документ в коллекцию.
+    /// Добавить документ в коллекцию.
     /// </summary>
     /// <param name="child">Документ.</param>
     public void Add(IDocument child)
@@ -56,7 +51,7 @@ namespace SaveDocuments.Document
     }
 
     /// <summary>
-    /// Удаляет документы из коллекции.
+    /// Удалить документ из коллекции.
     /// </summary>
     /// <param name="child">Документ.</param>
     public void Remove(IDocument child)
@@ -65,12 +60,12 @@ namespace SaveDocuments.Document
     }
 
     /// <summary>
-    /// Получает строковое описание документа.
+    /// Получить строковое описание документа.
     /// </summary>
     /// <returns>Строковое описание документа.</returns>
     private string GetDescription()
     {
-      var descriptionRenderer = new DescriptionRenderer();
+      var descriptionRenderer = new DescriptionVisitor();
       this.Accept(descriptionRenderer);
 
       return descriptionRenderer.ToString();
@@ -85,7 +80,7 @@ namespace SaveDocuments.Document
     /// </summary>
     /// <param name="id">Идентификатор.</param>
     /// <param name="name">Имя.</param>
-    public CompositeDocument(int id, string name) 
+    public CompositeDocument(int id, string name)
     {
       this.Id = id;
       this.Name = name;

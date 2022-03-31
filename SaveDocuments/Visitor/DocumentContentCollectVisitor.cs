@@ -1,52 +1,49 @@
 ﻿using SaveDocuments.Document;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SaveDocuments.Renderer
+namespace SaveDocuments.Visitor
 {
   /// <summary>
-  /// Собирает контент файлов.
+  /// Собирает контент документов.
   /// </summary>
-  internal class FileRenderer : IRenderer
+  internal class DocumentContentCollectVisitor : IVisitor
   {
     #region Поля и свойства
 
     /// <summary>
-    /// Контент файлов
+    /// Контент файлов.
     /// </summary>
     private readonly List<FileContent> content = new List<FileContent>();
 
     /// <summary>
-    /// Контент файлов
+    /// Результат.
     /// </summary>
-    public IEnumerable<FileContent> Contents => content;
+    public IEnumerable<FileContent> Result => content;
 
     #endregion
 
-    #region IRenderer
+    #region IVisitor
 
     public void BeginVisit(IDocument document)
     {
-      content.Add(new FileContent(document.Name, Array.Empty<byte>()));
+      this.content.Add(new FileContent(document.Name, Array.Empty<byte>()));
     }
 
     public void BeginVisitComposite(IDocument composite)
-    {}
+    { }
 
     public void EndVisit(IDocument document)
-    {}
+    { }
 
     public void EndVisitComposite(IDocument composite)
-    {}
+    { }
 
     #endregion
   }
 
   /// <summary>
-  /// Запись содержит имя файла и его контент.
+  /// Имя файла и его контент.
   /// </summary>
   internal class FileContent
   {

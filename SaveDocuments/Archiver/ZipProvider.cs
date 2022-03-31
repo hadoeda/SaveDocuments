@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaveDocuments.Archiver
 {
@@ -12,9 +8,9 @@ namespace SaveDocuments.Archiver
   internal class ZipProvider
   {
     #region Методы
-    
+
     /// <summary>
-    /// Архивирует документы в указанной директории.
+    /// Зархивировать файлы в директории.
     /// </summary>
     /// <param name="path">Путь к директории.</param>
     /// <param name="fileName">Имя файла архива.</param>
@@ -24,7 +20,7 @@ namespace SaveDocuments.Archiver
     }
 
     /// <summary>
-    /// Разархивирует указанный файл в указанную директорию.
+    /// Разархивиовать файл в директорию.
     /// </summary>
     /// <param name="path">Путь к директории.</param>
     /// <param name="fileName">Имя файла архива.</param>

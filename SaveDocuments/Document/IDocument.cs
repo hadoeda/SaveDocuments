@@ -1,14 +1,9 @@
-﻿using SaveDocuments.Renderer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SaveDocuments.Visitor;
 
 namespace SaveDocuments.Document
 {
   /// <summary>
-  /// Интерфейс описывающий документ.
+  /// Документ.
   /// </summary>
   internal interface IDocument
   {
@@ -21,7 +16,7 @@ namespace SaveDocuments.Document
     /// Имя документа.
     /// </summary>
     string Name { get; }
-    
+
     /// <summary>
     /// Контент документа.
     /// </summary>
@@ -33,9 +28,9 @@ namespace SaveDocuments.Document
     string Description { get; }
 
     /// <summary>
-    /// Метод применения посетителя.
+    /// Примененить посетителя.
     /// </summary>
     /// <param name="renderer">Посетитель.</param>
-    void Accept(IRenderer renderer);
+    void Accept(IVisitor renderer);
   }
 }

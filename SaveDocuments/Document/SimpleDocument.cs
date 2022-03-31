@@ -1,9 +1,4 @@
-﻿using SaveDocuments.Renderer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SaveDocuments.Visitor;
 
 namespace SaveDocuments.Document
 {
@@ -15,15 +10,15 @@ namespace SaveDocuments.Document
     #region Методы
 
     /// <summary>
-    /// Возвращает пустой простой документ.
+    /// Создать пустой простой документ.
     /// </summary>
     /// <param name="id">Идентификатор.</param>
     /// <returns>Простой документ.</returns>
     public static SimpleDocument Empty(int id)
-    { 
-      return new SimpleDocument(id, $"default {id}", "default"); 
+    {
+      return new SimpleDocument(id, $"default {id}", "default");
     }
-    
+
     #endregion
 
     #region IDocument
@@ -35,17 +30,17 @@ namespace SaveDocuments.Document
     public string Content { get; }
 
     public string Description => this.Name;
-    
-    public void Accept(IRenderer renderer)
+
+    public void Accept(IVisitor renderer)
     {
       renderer.BeginVisit(this);
       renderer.EndVisit(this);
     }
-    
+
     #endregion
 
     #region Конструкторы
-    
+
     /// <summary>
     /// Конструктор.
     /// </summary>
@@ -58,7 +53,7 @@ namespace SaveDocuments.Document
       this.Name = name;
       this.Content = content;
     }
-    
+
     #endregion
   }
 }

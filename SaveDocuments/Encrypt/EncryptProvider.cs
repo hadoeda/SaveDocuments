@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaveDocuments.Encrypt
 {
@@ -14,7 +10,7 @@ namespace SaveDocuments.Encrypt
     #region Методы
 
     /// <summary>
-    /// Шифрует файлы в указанной директории.
+    /// Зашифровать файлы в директории.
     /// </summary>
     /// <param name="path">Путь к директории.</param>
     public void Encript(string path)
@@ -23,7 +19,7 @@ namespace SaveDocuments.Encrypt
     }
 
     /// <summary>
-    /// Расшифровывает файлы в укзанной директории.
+    /// Расшифровать файлы в директории.
     /// </summary>
     /// <param name="path">Путь к директории.</param>
     public void Decript(string path)

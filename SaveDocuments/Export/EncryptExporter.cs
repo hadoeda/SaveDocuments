@@ -1,16 +1,11 @@
 ﻿using SaveDocuments.Document;
 using SaveDocuments.Encrypt;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaveDocuments.Export
 {
   /// <summary>
-  /// Экспортирует документы в директорию.
-  /// И шифрует файлы в директории.
+  /// Экспортер с шифрованием документов в директорию.
   /// </summary>
   internal class EncryptExporter : IDocumentExporter
   {

@@ -1,14 +1,9 @@
 ﻿using SaveDocuments.Document;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaveDocuments.Export
 {
   /// <summary>
-  /// Экспортирует документ в хранилище.
+  /// Экспортер документа в хранилище.
   /// </summary>
   internal interface IDocumentExporter
   {
@@ -18,7 +13,7 @@ namespace SaveDocuments.Export
     string Path { get; }
 
     /// <summary>
-    /// Экспорт документа. 
+    /// Экспортировать документ.
     /// </summary>
     /// <param name="document">Документ.</param>
     void Export(IDocument document);

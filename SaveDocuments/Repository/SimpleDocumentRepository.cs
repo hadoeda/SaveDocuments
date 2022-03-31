@@ -1,15 +1,11 @@
 ﻿using SaveDocuments.Document;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaveDocuments.Repository
 {
   /// <summary>
   /// Простой репозиторий.
-  /// Заглушка возвращающая всегда один документ.
+  /// Заглушка, возвращающая всегда один документ.
   /// </summary>
   internal sealed class SimpleDocumentRepository : IDocumentRepository
   {
@@ -43,15 +39,15 @@ namespace SaveDocuments.Repository
     /// </summary>
     public SimpleDocumentRepository()
     {
-      var document = new CompositeDocument(1, "Комплект 1");
-      var innerDocument = new CompositeDocument(2, "Комплект 2");
-      innerDocument.Add(new SimpleDocument(3, "Документ 3", "Документ 3"));
-      innerDocument.Add(new SimpleDocument(4, "Документ 4", "Документ 4"));
-      innerDocument.Add(new SimpleDocument(5, "Документ 5", "Документ 5"));
-      document.Add(innerDocument);
-      document.Add(new SimpleDocument(6, "Документ 6", "Документ 6"));
+      var composite1 = new CompositeDocument(1, "Комплект 1");
+      var composite2 = new CompositeDocument(2, "Комплект 2");
+      composite2.Add(new SimpleDocument(3, "Документ 3", "Документ 3"));
+      composite2.Add(new SimpleDocument(4, "Документ 4", "Документ 4"));
+      composite2.Add(new SimpleDocument(5, "Документ 5", "Документ 5"));
+      composite1.Add(composite2);
+      composite1.Add(new SimpleDocument(6, "Документ 6", "Документ 6"));
 
-      this.document = document;
+      this.document = composite1;
     }
 
     #endregion

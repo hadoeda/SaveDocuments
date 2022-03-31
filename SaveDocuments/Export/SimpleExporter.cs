@@ -1,30 +1,25 @@
 ﻿using SaveDocuments.Document;
-using SaveDocuments.Renderer;
+using SaveDocuments.Visitor;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaveDocuments.Export
 {
   /// <summary>
-  /// Экспортирует документ в директорию. 
+  /// Экспортирует документ в директорию.
   /// </summary>
   internal class SimpleExporter : IDocumentExporter
   {
     #region IDocumentExporter
 
-    public string Path { get; private set; }
+    public string Path { get; }
 
     public void Export(IDocument document)
     {
-      var fileContent = new FileRenderer();
+      var fileContent = new DocumentContentCollectVisitor();
       document.Accept(fileContent);
-      
-      foreach(var file in fileContent.Contents)
+      foreach (var file in fileContent.Result)
       {
-        Console.WriteLine("Файл с именем {0} экспортирован в папку {1}", file.Name, Path);
+        Console.WriteLine("Файл с именем {0} экспортирован в папку {1}", file.Name, this.Path);
       }
 
       Console.WriteLine("-------------");
@@ -40,9 +35,13 @@ namespace SaveDocuments.Export
     /// Конструктор.
     /// </summary>
     /// <param name="path"></param>
+    /// <exception cref="ArgumentNullException">Пустой путь к директории.</exception>
     public SimpleExporter(string path)
     {
-      this.Path = path ?? throw new ArgumentNullException(nameof(path));
+      if (string.IsNullOrEmpty(path))
+        throw new ArgumentNullException(nameof(path));
+
+      this.Path = path;
     }
 
     #endregion
