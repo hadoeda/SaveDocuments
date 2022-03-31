@@ -68,7 +68,7 @@ namespace SaveDocuments.Document
       var descriptionRenderer = new DescriptionVisitor();
       this.Accept(descriptionRenderer);
 
-      return descriptionRenderer.ToString();
+      return descriptionRenderer.Result;
     }
 
     #endregion

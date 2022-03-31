@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Archiver\ZipProvider.cs" />
-    <Compile Include="DocumentOperator.cs" />
     <Compile Include="Document\CompositeDocument.cs" />
     <Compile Include="Document\SimpleDocument.cs" />
     <Compile Include="Document\IDocument.cs" />
@@ -55,12 +54,12 @@
     <Compile Include="Export\ZipExporter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Renderer\FileRenderer.cs" />
+    <Compile Include="Visitor\DocumentContentCollectVisitor.cs" />
     <Compile Include="Repository\DirectoryDocumentRepository.cs" />
     <Compile Include="Repository\IDocumentRepository.cs" />
     <Compile Include="Repository\SimpleDocumentRepository.cs" />
-    <Compile Include="Renderer\IRenderer.cs" />
-    <Compile Include="Renderer\DescriptionRenderer.cs" />
+    <Compile Include="Visitor\IVisitor.cs" />
+    <Compile Include="Visitor\DescriptionVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
