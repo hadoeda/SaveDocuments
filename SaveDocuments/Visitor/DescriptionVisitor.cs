@@ -13,7 +13,7 @@ namespace SaveDocuments.Visitor
     /// <summary>
     /// Результат.
     /// </summary>
-    public string Result => builder.ToString();
+    public string Result => this.builder.ToString();
 
     /// <summary>
     /// Описание документа.

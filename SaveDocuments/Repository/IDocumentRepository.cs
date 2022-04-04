@@ -13,11 +13,5 @@ namespace SaveDocuments.Repository
     /// <param name="id">Идентификатор репозитория.</param>
     /// <returns>Документ.</returns>
     IDocument Get(int id);
-
-    /// <summary>
-    /// Сохранить документ в репозиторий.
-    /// </summary>
-    /// <param name="document">Документ.</param>
-    void Save(IDocument document);
   }
 }

@@ -3,15 +3,10 @@
 namespace SaveDocuments.Export
 {
   /// <summary>
-  /// Экспортер документа в хранилище.
+  /// Экспортёр документа.
   /// </summary>
   internal interface IDocumentExporter
   {
-    /// <summary>
-    /// Директория.
-    /// </summary>
-    string Path { get; }
-
     /// <summary>
     /// Экспортировать документ.
     /// </summary>

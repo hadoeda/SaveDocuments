@@ -1,6 +1,7 @@
 ﻿using SaveDocuments.Export;
 using SaveDocuments.Repository;
 using System;
+using System.Text.RegularExpressions;
 
 namespace SaveDocuments
 {
@@ -82,7 +83,9 @@ namespace SaveDocuments
       try
       {
         if (args.Length == 0)
+        {
           PrintHelp();
+        }
         else
         {
           var options = ParseCommandLine(args);
@@ -111,18 +114,20 @@ namespace SaveDocuments
         {
           var dirArgParts = arg.Split('=');
           if (dirArgParts.Length < 2)
-            throw new ArgumentException("Не указана папка для экспорта");
+            throw new ArgumentException("Не указана папка для экспорта.");
 
-          result.DirectoryPath = dirArgParts[1];
+          result.DirectoryPath = ParseDirectory(dirArgParts[1]);
         }
         else if (arg.Contains(DocOption))
         {
           var docArgParts = arg.Split('=');
           if (docArgParts.Length < 2)
-            throw new ArgumentException("Не указан идентификатор документа");
+            throw new ArgumentException("Не указан идентификатор документа.");
 
-          if (!int.TryParse(docArgParts[1], out int id))
+          if (int.TryParse(docArgParts[1], out int id))
             result.DocumentId = id;
+          else
+            throw new ArgumentException("Неверно указан идентификатор документа.");
         }
         else if (arg == EncryptOption)
         {
@@ -135,26 +140,43 @@ namespace SaveDocuments
       }
 
       if (string.IsNullOrEmpty(result.DirectoryPath))
-        throw new ArgumentException("Не указана папка для экспорта");
+        throw new ArgumentException("Не указана папка для экспорта.");
 
       return result;
     }
 
     /// <summary>
-    /// Экспортировать докуметы
-    /// <param name="options">Опции экспорта</param>
+    /// Экспортировать докуметы.
+    /// <param name="options">Опции экспорта.</param>
     /// </summary>
     private static void ExportDocuments(CommandLineOptions options)
     {
       IDocumentRepository source = new SimpleDocumentRepository();
 
-      IDocumentExporter exporter = new SimpleExporter(options.DirectoryPath);
+      var exporter = new DirectoryExporter(options.DirectoryPath);
       if (options.Encrypt) exporter = new EncryptExporter(exporter);
-      if (options.Zip) exporter = new ZipExporter(exporter);
+      if (options.Zip) exporter = new ArchExporter(exporter);
 
-      var destination = new DirectoryDocumentRepositor(exporter);
       var document = source.Get(options.DocumentId);
-      destination.Save(document);
+      exporter.Export(document);
+    }
+
+    /// <summary>
+    /// Pаcпарсить путь к директории из аргумента.
+    /// </summary>
+    /// <param name="arg">Аргумент командной строки.</param>
+    /// <returns>Путь к директории.</returns>
+    private static string ParseDirectory(string arg)
+    {
+      string result = arg;
+      var pathQuotes = new Regex("[', \"](.+)[', \"]");
+      var matches = pathQuotes.Matches(arg);
+      if (matches.Count == 0)
+        return result;
+
+      result = matches[0].Groups[1].Value;
+
+      return result;
     }
 
     /// <summary>
@@ -162,11 +184,11 @@ namespace SaveDocuments
     /// </summary>
     private static void PrintHelp()
     {
-      Console.WriteLine("Help:");
-      Console.WriteLine($"{DocOption}=something   Document id.");
-      Console.WriteLine($"{DirOption}=something   Export directory.");
-      Console.WriteLine($"{EncryptOption}         Encrypt directory files.");
-      Console.WriteLine($"{ZipOption}             Zip directory files.");
+      Console.WriteLine("Справка:");
+      Console.WriteLine($"{DocOption}=something   Идентификатор документа.");
+      Console.WriteLine($"{DirOption}='something' Папка экспорта.");
+      Console.WriteLine($"{EncryptOption}         Флаг шифрования экспортированных файлов.");
+      Console.WriteLine($"{ZipOption}             Флаг архивации экспортированных файлов");
     }
 
     #endregion

@@ -5,15 +5,21 @@ using System;
 namespace SaveDocuments.Export
 {
   /// <summary>
-  /// Экспортирует документ в директорию.
+  /// Экспорёр документов в директорию файловой системы.
   /// </summary>
-  internal class SimpleExporter : IDocumentExporter
+  internal class DirectoryExporter : IDocumentExporter
   {
-    #region IDocumentExporter
+    #region Поля и свойства
 
+    /// <summary>
+    /// Путь к директории.
+    /// </summary>
     public string Path { get; }
 
-    public void Export(IDocument document)
+    #endregion
+
+    #region IDocumentExporter
+    public virtual void Export(IDocument document)
     {
       var fileContent = new DocumentContentCollectVisitor();
       document.Accept(fileContent);
@@ -36,7 +42,7 @@ namespace SaveDocuments.Export
     /// </summary>
     /// <param name="path"></param>
     /// <exception cref="ArgumentNullException">Пустой путь к директории.</exception>
-    public SimpleExporter(string path)
+    public DirectoryExporter(string path)
     {
       if (string.IsNullOrEmpty(path))
         throw new ArgumentNullException(nameof(path));

@@ -5,7 +5,7 @@ namespace SaveDocuments.Archiver
   /// <summary>
   /// Провайдер архивирования.
   /// </summary>
-  internal class ZipProvider
+  internal class ArchProvider
   {
     #region Методы
 
@@ -14,7 +14,7 @@ namespace SaveDocuments.Archiver
     /// </summary>
     /// <param name="path">Путь к директории.</param>
     /// <param name="fileName">Имя файла архива.</param>
-    public void Zip(string path, string fileName)
+    public void Arch(string path, string fileName)
     {
       Console.WriteLine("Файлы из папки {0} запакованы в zip архив с именем {1}", path, fileName);
     }
@@ -24,7 +24,7 @@ namespace SaveDocuments.Archiver
     /// </summary>
     /// <param name="path">Путь к директории.</param>
     /// <param name="fileName">Имя файла архива.</param>
-    public void UnZip(string path, string fileName)
+    public void UnArch(string path, string fileName)
     {
       Console.WriteLine("Файлы из zip архива {0} распакованы в папку {1}", fileName, path);
     }

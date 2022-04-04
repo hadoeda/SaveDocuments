@@ -13,8 +13,8 @@ namespace SaveDocuments.Document
     /// Создать пустой простой документ.
     /// </summary>
     /// <param name="id">Идентификатор.</param>
-    /// <returns>Простой документ.</returns>
-    public static SimpleDocument Empty(int id)
+    /// <returns>Простой пустой документ.</returns>
+    public static SimpleDocument CreateEmpty(int id)
     {
       return new SimpleDocument(id, $"default {id}", "default");
     }
@@ -31,10 +31,10 @@ namespace SaveDocuments.Document
 
     public string Description => this.Name;
 
-    public void Accept(IVisitor renderer)
+    public void Accept(IVisitor visitor)
     {
-      renderer.BeginVisit(this);
-      renderer.EndVisit(this);
+      visitor.BeginVisit(this);
+      visitor.EndVisit(this);
     }
 
     #endregion

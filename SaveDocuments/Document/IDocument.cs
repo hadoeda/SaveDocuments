@@ -30,7 +30,7 @@ namespace SaveDocuments.Document
     /// <summary>
     /// Примененить посетителя.
     /// </summary>
-    /// <param name="renderer">Посетитель.</param>
-    void Accept(IVisitor renderer);
+    /// <param name="visitor">Посетитель.</param>
+    void Accept(IVisitor visitor);
   }
 }

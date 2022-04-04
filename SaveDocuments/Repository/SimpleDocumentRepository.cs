@@ -12,7 +12,7 @@ namespace SaveDocuments.Repository
     #region Поля и свойства
 
     /// <summary>
-    /// Документ
+    /// Документ.
     /// </summary>
     private readonly IDocument document;
 
@@ -24,12 +24,6 @@ namespace SaveDocuments.Repository
     {
       return this.document;
     }
-
-    public void Save(IDocument document)
-    {
-      Console.WriteLine("Сохранение документа {0} в репозиторий", document.Name);
-    }
-
     #endregion
 
     #region Конструкторы

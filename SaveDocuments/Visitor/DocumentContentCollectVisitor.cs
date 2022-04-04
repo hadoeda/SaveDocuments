@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace SaveDocuments.Visitor
 {
   /// <summary>
-  /// Собирает контент документов.
+  /// Посетитель для сбора контента документа.
   /// </summary>
   internal class DocumentContentCollectVisitor : IVisitor
   {
@@ -19,7 +19,7 @@ namespace SaveDocuments.Visitor
     /// <summary>
     /// Результат.
     /// </summary>
-    public IEnumerable<FileContent> Result => content;
+    public IEnumerable<FileContent> Result => this.content;
 
     #endregion
 
