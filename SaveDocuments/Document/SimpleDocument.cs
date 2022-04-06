@@ -1,11 +1,13 @@
-﻿using SaveDocuments.Visitor;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SaveDocuments.Document
 {
   /// <summary>
   /// Простой документ.
   /// </summary>
-  internal sealed class SimpleDocument : IDocument
+  internal class SimpleDocument : IDocument
   {
     #region Методы
 
@@ -19,6 +21,16 @@ namespace SaveDocuments.Document
       return new SimpleDocument(id, $"default {id}", "default");
     }
 
+    /// <summary>
+    /// Получить описание документа.
+    /// </summary>
+    /// <param name="prefix">Префикс описания.</param>
+    /// <returns>Описание документа.</returns>
+    public virtual string GetDescription(string prefix)
+    {
+      return prefix + this.Name;
+    }
+
     #endregion
 
     #region IDocument
@@ -29,12 +41,26 @@ namespace SaveDocuments.Document
 
     public string Content { get; }
 
-    public string Description => this.Name;
+    public string Description => GetDescription(string.Empty);
 
-    public void Accept(IVisitor visitor)
+    public bool IsComposite { get; protected set; }
+
+    #endregion
+
+    #region IEnumerable<IDocument>
+
+    public virtual IEnumerator<IDocument> GetEnumerator()
     {
-      visitor.BeginVisit(this);
-      visitor.EndVisit(this);
+      return Enumerable.Empty<IDocument>().GetEnumerator();
+    }
+
+    #endregion
+
+    #region IEnumerable
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return this.GetEnumerator();
     }
 
     #endregion
@@ -52,6 +78,7 @@ namespace SaveDocuments.Document
       this.Id = id;
       this.Name = name;
       this.Content = content;
+      this.IsComposite = false;
     }
 
     #endregion

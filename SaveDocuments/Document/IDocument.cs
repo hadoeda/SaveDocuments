@@ -1,11 +1,11 @@
-﻿using SaveDocuments.Visitor;
+﻿using System.Collections.Generic;
 
 namespace SaveDocuments.Document
 {
   /// <summary>
   /// Документ.
   /// </summary>
-  internal interface IDocument
+  internal interface IDocument : IEnumerable<IDocument>
   {
     /// <summary>
     /// Идентификатор документа.
@@ -28,9 +28,8 @@ namespace SaveDocuments.Document
     string Description { get; }
 
     /// <summary>
-    /// Примененить посетителя.
+    /// Флаг составного документа.
     /// </summary>
-    /// <param name="visitor">Посетитель.</param>
-    void Accept(IVisitor visitor);
+    bool IsComposite { get; }
   }
 }

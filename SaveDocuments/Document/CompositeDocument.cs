@@ -1,41 +1,28 @@
-﻿using SaveDocuments.Visitor;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text;
 
 namespace SaveDocuments.Document
 {
   /// <summary>
   /// Документ содержащий другие документы.
   /// </summary>
-  internal sealed class CompositeDocument : IDocument
+  internal class CompositeDocument : SimpleDocument
   {
+    #region Константы
+
+    /// <summary>
+    /// Здвиг описания внутренного документа.
+    /// </summary>
+    private const string DescriptionShift = "  ";
+
+    #endregion
+
     #region Поля и свойства
 
     /// <summary>
     /// Коллекция документов.
     /// </summary>
-    private readonly Dictionary<int, IDocument> documents = new Dictionary<int, IDocument>();
-
-    #endregion
-
-    #region IDocument
-
-    public int Id { get; }
-
-    public string Name { get; }
-
-    public string Content { get; }
-
-    public string Description => GetDescription();
-
-    public void Accept(IVisitor renderer)
-    {
-      renderer.BeginVisitComposite(this);
-      foreach (var document in this.documents.Values)
-      {
-        document.Accept(renderer);
-      }
-      renderer.EndVisitComposite(this);
-    }
+    private readonly Dictionary<int, SimpleDocument> documents = new Dictionary<int, SimpleDocument>();
 
     #endregion
 
@@ -45,7 +32,7 @@ namespace SaveDocuments.Document
     /// Добавить документ в коллекцию.
     /// </summary>
     /// <param name="child">Документ.</param>
-    public void Add(IDocument child)
+    public void Add(SimpleDocument child)
     {
       this.documents.Add(child.Id, child);
     }
@@ -54,21 +41,42 @@ namespace SaveDocuments.Document
     /// Удалить документ из коллекции.
     /// </summary>
     /// <param name="child">Документ.</param>
-    public void Remove(IDocument child)
+    public void Remove(SimpleDocument child)
     {
       this.documents.Remove(child.Id);
     }
 
-    /// <summary>
-    /// Получить строковое описание документа.
-    /// </summary>
-    /// <returns>Строковое описание документа.</returns>
-    private string GetDescription()
-    {
-      var descriptionRenderer = new DescriptionVisitor();
-      this.Accept(descriptionRenderer);
+    #endregion
 
-      return descriptionRenderer.Result;
+    #region Базовый класс
+
+    public override IEnumerator<IDocument> GetEnumerator()
+    {
+      var inners = new List<IDocument>();
+      foreach (var document in this.documents.Values)
+      {
+        if (!document.IsComposite)
+          inners.Add(document);
+        else
+          inners.AddRange(document);
+      }
+
+      return inners.GetEnumerator();
+    }
+
+    public override string GetDescription(string prefix)
+    {
+      var description = new StringBuilder();
+      description.Append(prefix + this.Name);
+
+      var innerPrefix = DescriptionShift + prefix;
+      foreach (var document in this.documents.Values)
+      {
+        description.AppendLine();
+        description.Append(document.GetDescription(innerPrefix));
+      }
+
+      return description.ToString();
     }
 
     #endregion
@@ -80,10 +88,9 @@ namespace SaveDocuments.Document
     /// </summary>
     /// <param name="id">Идентификатор.</param>
     /// <param name="name">Имя.</param>
-    public CompositeDocument(int id, string name)
+    public CompositeDocument(int id, string name) : base(id, name, string.Empty)
     {
-      this.Id = id;
-      this.Name = name;
+      this.IsComposite = true;
     }
 
     #endregion

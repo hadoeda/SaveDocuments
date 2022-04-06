@@ -1,4 +1,4 @@
 ﻿Репозиторий - все классы реализующие интерфейс IDocumentRepositoy
 Компоновщик - CompositeDocument
-Посетитель - все классы реализующие интерфейс IVisitor
+Итератор - классы IDocument
 Декоратор - EncryptExporter, ZipExporter
