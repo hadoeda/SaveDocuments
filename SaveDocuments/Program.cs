@@ -188,7 +188,7 @@ namespace SaveDocuments
     {
       Console.WriteLine("Справка:");
       Console.WriteLine($"{DocOption}=something   Идентификатор документа.");
-      Console.WriteLine($"{DirOption}='something' Папка экспорта.");
+      Console.WriteLine($"{DirOption}=\"something\" Папка экспорта.");
       Console.WriteLine($"{EncryptOption}         Флаг шифрования экспортированных файлов.");
       Console.WriteLine($"{ZipOption}             Флаг архивации экспортированных файлов");
     }

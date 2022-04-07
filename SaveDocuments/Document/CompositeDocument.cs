@@ -50,7 +50,7 @@ namespace SaveDocuments.Document
 
     #region Базовый класс
 
-    public override IEnumerator<IDocument> GetEnumerator()
+    public override IEnumerable<IDocument> GetCollection()
     {
       var inners = new List<IDocument>();
       foreach (var document in this.documents.Values)
@@ -58,10 +58,10 @@ namespace SaveDocuments.Document
         if (!document.IsComposite)
           inners.Add(document);
         else
-          inners.AddRange(document);
+          inners.AddRange(document.GetCollection());
       }
 
-      return inners.GetEnumerator();
+      return inners;
     }
 
     public override string GetDescription(string prefix)

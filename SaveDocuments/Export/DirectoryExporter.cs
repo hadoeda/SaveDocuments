@@ -22,7 +22,7 @@ namespace SaveDocuments.Export
     public virtual void Export(IDocument document)
     {
       if (document.IsComposite)
-        foreach (var innerDoc in document)
+        foreach (var innerDoc in document.GetCollection())
         {
           Console.WriteLine("Файл с именем {0} экспортирован в папку {1}", innerDoc.Name, this.Path);
         }

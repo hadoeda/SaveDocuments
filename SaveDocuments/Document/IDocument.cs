@@ -5,7 +5,7 @@ namespace SaveDocuments.Document
   /// <summary>
   /// Документ.
   /// </summary>
-  internal interface IDocument : IEnumerable<IDocument>
+  internal interface IDocument
   {
     /// <summary>
     /// Идентификатор документа.
@@ -31,5 +31,11 @@ namespace SaveDocuments.Document
     /// Флаг составного документа.
     /// </summary>
     bool IsComposite { get; }
+
+    /// <summary>
+    /// Получить коллекция вложенных документов.
+    /// </summary>
+    /// <returns>Коллекция вложенных документов.</returns>
+    IEnumerable<IDocument> GetCollection();
   }
 }

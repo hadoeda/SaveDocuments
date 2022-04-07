@@ -45,22 +45,9 @@ namespace SaveDocuments.Document
 
     public bool IsComposite { get; protected set; }
 
-    #endregion
-
-    #region IEnumerable<IDocument>
-
-    public virtual IEnumerator<IDocument> GetEnumerator()
+    public virtual IEnumerable<IDocument> GetCollection()
     {
-      return Enumerable.Empty<IDocument>().GetEnumerator();
-    }
-
-    #endregion
-
-    #region IEnumerable
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-      return this.GetEnumerator();
+      return Enumerable.Empty<IDocument>();
     }
 
     #endregion
