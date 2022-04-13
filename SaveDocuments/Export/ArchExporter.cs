@@ -7,14 +7,14 @@ namespace SaveDocuments.Export
   /// <summary>
   /// Экспортёр документа в директорию, с архивацией.
   /// </summary>
-  internal class ArchExporter : DirectoryExporter
+  internal class ArchExporter : IDocumentExporter
   {
     #region Поля и свойства
 
     /// <summary>
     /// Экспортер документов в директорию.
     /// </summary>
-    private readonly DirectoryExporter exporter;
+    private readonly IDocumentExporter exporter;
 
     /// <summary>
     /// Провайдер для архивирования
@@ -25,11 +25,11 @@ namespace SaveDocuments.Export
 
     #region IDocumentExporter
 
-    public override void Export(IDocument document)
+    public void Export(IDocument document, string path)
     {
-      this.exporter.Export(document);
+      this.exporter.Export(document, path);
       Console.WriteLine();
-      this.provider.Arch(this.Path, document.Name);
+      this.provider.Arch(path, document.Name);
     }
 
     #endregion
@@ -40,7 +40,7 @@ namespace SaveDocuments.Export
     /// Конструктор.
     /// </summary>
     /// <param name="exporter">Экспортер документов.</param>
-    public ArchExporter(DirectoryExporter exporter) : base(exporter.Path)
+    public ArchExporter(IDocumentExporter exporter)
     {
       if (exporter == null)
         throw new ArgumentNullException(nameof(exporter));

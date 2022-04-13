@@ -153,12 +153,12 @@ namespace SaveDocuments
     {
       IDocumentRepository source = new SimpleDocumentRepository();
 
-      var exporter = new DirectoryExporter(options.DirectoryPath);
+      IDocumentExporter exporter = new DirectoryExporter();
       if (options.Encrypt) exporter = new EncryptExporter(exporter);
       if (options.Zip) exporter = new ArchExporter(exporter);
 
       var document = source.Get(options.DocumentId);
-      exporter.Export(document);
+      exporter.Export(document, options.DirectoryPath);
 
 
     }

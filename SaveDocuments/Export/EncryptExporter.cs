@@ -7,14 +7,14 @@ namespace SaveDocuments.Export
   /// <summary>
   /// Экспортёр документов в директорию, с шифрованием.
   /// </summary>
-  internal class EncryptExporter : DirectoryExporter
+  internal class EncryptExporter : IDocumentExporter
   {
     #region Поля и свойства
 
     /// <summary>
     /// Экспортёр документов в директорию.
     /// </summary>
-    private readonly DirectoryExporter exporter;
+    private readonly IDocumentExporter exporter;
 
     /// <summary>
     /// Провайдер для шифрования.
@@ -25,11 +25,11 @@ namespace SaveDocuments.Export
 
     #region IDocumentExporter
 
-    public override void Export(IDocument document)
+    public void Export(IDocument document, string path)
     {
-      this.exporter.Export(document);
+      this.exporter.Export(document, path);
       Console.WriteLine();
-      this.provider.Encript(this.Path);
+      this.provider.Encript(path);
     }
 
     #endregion
@@ -40,7 +40,7 @@ namespace SaveDocuments.Export
     /// Конструктор.
     /// </summary>
     /// <param name="exporter">Экспортер документов.</param>
-    public EncryptExporter(DirectoryExporter exporter) : base(exporter.Path)
+    public EncryptExporter(IDocumentExporter exporter)
     {
       if (exporter == null)
         throw new ArgumentNullException(nameof(exporter));

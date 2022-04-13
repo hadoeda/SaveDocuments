@@ -11,6 +11,7 @@ namespace SaveDocuments.Export
     /// Экспортировать документ.
     /// </summary>
     /// <param name="document">Документ.</param>
-    void Export(IDocument document);
+    /// <param name="path">Путь экспорта.</param>
+    void Export(IDocument document, string path);
   }
 }
